@@ -1,6 +1,6 @@
 # 2019 Novel Coronavirus
 
-Wednesday 29th January 2020, the Novel Coronavirus was declared a Global Health Emergency by the World Health Organisation [(WHO)](https://www.who.int/emergencies/diseases/novel-coronavirus-2019 'World Health Organisation'). On the 7th February 2020 the number of confirmed cases were 31,485 in over 28 countries, which has risen to 71,811 by 17th February 2020 (ie over 128% in 10 days).
+Wednesday 29th January 2020, the Novel Coronavirus was declared a Global Health Emergency by the World Health Organisation [(WHO)](https://www.who.int/emergencies/diseases/novel-coronavirus-2019 'World Health Organisation'). On the 7th February 2020 the number of confirmed cases was 31,485 in over 28 countries, which rose to 71,811 by 17th February 2020 (ie over 128% in 10 days).
 
 This project is to build an information hub for the 2019 novel coronavirus. This hub will contain interactive dashboard that gives a real-time visualization on the coronavirus and up-to-date information on its prevention.
 
@@ -23,7 +23,7 @@ This project is to build an information hub for the 2019 novel coronavirus. This
 
 ## Getting Started
 
-These instructions will get a copy of the project up and running on your local machine for development and testing purposes. See ['how to contribute'](#contribute) for notes on contributing to the project.
+These instructions will get a copy of the project up and running on your local machine for development and testing purposes. See ['how to contribute'](#how-to-contribute) for notes on contributing to the project.
 
 ## Technology
 
