@@ -8,28 +8,28 @@ This project is to build an information hub for the 2019 novel coronavirus. This
 
 ## Table of contents
 
-- [Getting Started](#gettingstarted)
+- [Getting Started](#getting-started)
 - [Technology](#technology)
   - [Prerequisites](#prerequisite)
-  - [Built With](#technologies)
+  - [Built With](#built-with)
   - [Installing](#installing)
     -[Frontend](#frontend)
     -[Backend](#backend)
-- [How to Contribute](#contribute)
-- [Acknowledgement](#acknnowlegdement)
+- [How to Contribute](#how-to-contribute)
+- [Acknowledgement](#acknowledgment)
   - [Inspiration](#inspiration)
   - [Data Source](#resource)
 - [License](#license)
 
-## Getting Started {#gettingstarted}
+## Getting Started
 
 These instructions will get a copy of the project up and running on your local machine for development and testing purposes. See ['how to contribute'](#contribute) for notes on contributing to the project.
 
-## Technology {#technology}
+## Technology
 
 The following software needs to be installed.
 
-### Prerequisite {#prerequisite}
+### Prerequisite
 
 - [Python 3.5 and later](https://www.python.org/)
 - [Node JS](https://nodejs.org/)
@@ -38,15 +38,15 @@ The following software needs to be installed.
 - [Other dependencies](./requirements.txt)
 - [Google Cloud Platform](https://cloud.google.com/)
 
-### Built With {#technologies}
+### Built With
 
 - [Angular](https://angular.io/)
 - [D3js](https://d3js.org/)
 - [Django](https://www.djangoproject.com/)
 
-### Installing {#installing}
+### Installing
 
-#### Frontend {#frontend}
+#### Frontend
 
 1. Install all dependencies
   ```npm install```
@@ -54,7 +54,7 @@ The following software needs to be installed.
 2. Start server
   ```ng serve```
 
-#### Backend {backend}
+#### Backend
 
 **Create a virtual environment.**
 Use **virtualenv** to create a virtual environment for the project, Run the following in your terminal.
@@ -80,7 +80,7 @@ Run manage.py in the backend folder
   python manage.py runserver
   ```
 
-## How to contribute {#contribute}
+## How to contribute
 
 You can contribute to the project and make it better. It is an open source project. Improve the code and send in a pull request with your contributions.
 
@@ -92,18 +92,18 @@ If sending pull requests are not your thing, you can send me a tweet @SolomonIgo
 Please read [CONTRIBUTING.md](https://github.com/igorisolomon/coronavirus/blob/master/CONTRIBUTING) for details on our code of conduct, and the process for submitting pull requests to us.
 See also the list of [contributors](https://github.com/igorisolomon/coronavirus/blob/master/contributors) who participated in this project. -->
 
-## Acknowledgments {#acknowldgement}
+## Acknowledgment
 
-### Inspiration {#inspiration}
+### Inspiration
 
 - [Johns Hopkins University Dashboard](https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html?fbclid=IwAR2mWEw0X_B5jbR0Fm23t2TVJGzVqUY6ok98DzrGLMrMXCR_c5joZV5AdNU#/bda7594740fd40299423467b48e9ecf6)
 
-### Resource {#resource}
+### Resource
 
 - [World Health Organization (WHO)](https://www.who.int/)
 - [Observable](https://observablehq.com/@fil/ncov2019-data)
 - [Johns Hopkins University Data Source](https://docs.google.com/spreadsheets/d/1UF2pSkFTURko2OvfHWWlFpDFAr1UxCBA4JLwlSP6KFo/htmlview?sle=true#)
 
-## License {#licence}
+## License
 
 The project is licensed under the MIT license. See [LICENSE.md](https://github.com/igorisolomon/coronavirus/blob/master/LICENSE 'MIT License') for more information.
