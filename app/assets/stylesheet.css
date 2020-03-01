@@ -52,7 +52,11 @@
 .card:hover{
     box-shadow: 0.3rem 0.7rem 1.5rem #cccccc;
 }
-
+.contributor{
+    font-size: 15px;
+    margin-bottom: 0;
+    overflow-y: scroll;
+}
 .allColumns{
     display: flex;
     justify-content: space-evenly;

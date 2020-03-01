@@ -42,6 +42,17 @@ total_confirmed = total_card(confirm)
 total_recovered = total_card(recover)
 total_death = total_card(death)
 
+contributor = """
+Solomon Igori🇳🇬,
+Bright Morkli🇬🇭,
+Ehigiator Klinton🇳🇬,
+Gabriel Addo🇬🇭,
+Boris Bizo🇬🇦,
+Robin Mawsime🇬🇭,
+Daouda Tandiang DJIBA🇸🇳,
+Abdul Jalal Mohammed🇬🇭
+"""
+
 external_stylesheets = ['https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css']
 
 external_scripts = ['https://platform.twitter.com/widgets.js']
@@ -112,6 +123,7 @@ app.layout = html.Div([
             # Contributors
             html.Div([
                 html.P(['Contributors'], className='title'),
+                html.P(contributor, className='contributor')
             ], className='report card container'),
         ], className='col-5'),
 
