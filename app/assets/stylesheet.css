@@ -8,3 +8,52 @@
     display: flex;
     align-items: center;
 }
+.total{
+    min-height: 6rem;
+}
+.title{
+    margin-top: 1rem;
+    margin-bottom: 0;
+    font-size: 15px;
+    color: #777777;
+}
+.total .value{
+    font-size: 36px;
+    text-align: right;
+}
+.confirm{
+    color: orange;
+}
+.recover{
+    color: green;
+}
+.death{
+    color: red;
+}
+.graph{
+    min-height: 12rem;
+}
+.map{
+    min-height: 22.3rem;
+}
+.report{
+    min-height: 4.6rem;
+}
+.news{
+    min-height: 13.4rem;
+}
+.card{
+    border: none;
+    margin-top: 1.5rem;
+    background-color: #ffffff;
+    box-shadow: 0.1rem 0.3rem 0.8rem #eeeeee;
+    transition: box-shadow 1s;
+}
+.card:hover{
+    box-shadow: 0.3rem 0.7rem 1.5rem #cccccc;
+}
+
+.allColumns{
+    display: flex;
+    justify-content: space-evenly;
+}
