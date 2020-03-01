@@ -13,8 +13,6 @@ This project is to build an information hub for the 2019 novel coronavirus. This
   - [Prerequisites](#prerequisite)
   - [Built With](#built-with)
   - [Installing](#installing)
-    -[Frontend](#frontend)
-    -[Backend](#backend)
 - [How to Contribute](#how-to-contribute)
 - [Acknowledgement](#acknowledgment)
   - [Inspiration](#inspiration)
@@ -32,29 +30,16 @@ The following software needs to be installed.
 ### Prerequisite
 
 - [Python 3.5 and later](https://www.python.org/)
-- [Node JS](https://nodejs.org/)
-- [Typescript](https://www.typescriptlang.org/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Other dependencies](./requirements.txt)
 - [Google Cloud Platform](https://cloud.google.com/)
 
 ### Built With
 
-- [Angular](https://angular.io/)
-- [D3js](https://d3js.org/)
-- [Django](https://www.djangoproject.com/)
+- [Plotly-dash](https://dash.plot.ly/)
+- [Flask](https://palletsprojects.com/p/flask/)
 
 ### Installing
-
-#### Frontend
-
-1. Install all dependencies
-  ```npm install```
-
-2. Start server
-  ```ng serve```
-
-#### Backend
 
 **Create a virtual environment.**
 Use **virtualenv** to create a virtual environment for the project, Run the following in your terminal.
@@ -72,13 +57,10 @@ Use **virtualenv** to create a virtual environment for the project, Run the foll
 Run the requirement.txt on the activated workspace
   ```pip install -r requirement.txt```
 
-**Run the backend server**
-Run manage.py in the backend folder
+**Run the application server**
+Run main.py in the app folder
 
-  ```python
-  cd backend
-  python manage.py runserver
-  ```
+  ```python main.py```
 
 ## How to contribute
 
@@ -87,10 +69,6 @@ You can contribute to the project and make it better. It is an open source proje
 [Here is how to send in a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
 If sending pull requests are not your thing, you can send me a tweet @SolomonIgori or email at [igorisolomon@gmail.com](igorisolomon@gmail.com "Igori's email")
-
-<!-- 
-Please read [CONTRIBUTING.md](https://github.com/igorisolomon/coronavirus/blob/master/CONTRIBUTING) for details on our code of conduct, and the process for submitting pull requests to us.
-See also the list of [contributors](https://github.com/igorisolomon/coronavirus/blob/master/contributors) who participated in this project. -->
 
 ## Acknowledgment
 
@@ -102,7 +80,7 @@ See also the list of [contributors](https://github.com/igorisolomon/coronavirus/
 
 - [World Health Organization (WHO)](https://www.who.int/)
 - [Observable](https://observablehq.com/@fil/ncov2019-data)
-- [Johns Hopkins University Data Source](https://docs.google.com/spreadsheets/d/1UF2pSkFTURko2OvfHWWlFpDFAr1UxCBA4JLwlSP6KFo/htmlview?sle=true#)
+- [Johns Hopkins University Data Source](https://github.com/CSSEGISandData/COVID-19)
 
 ## License
 

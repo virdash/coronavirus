@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+
+.banner{
+    font-family: 'Ubuntu', ;
+    font-weight: bolder ;
+    padding-left: 50px;
+    background-color: #00acee;
+    color: #ffffff;
+}
