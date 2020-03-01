@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:500,&display=swap');
 
 .banner{
-    font-family: 'Ubuntu', ;
-    font-weight: bolder ;
+    font-family: 'Ubuntu';
     padding-left: 50px;
     background-color: #00acee;
     color: #ffffff;
+    display: flex;
+    align-items: center;
 }

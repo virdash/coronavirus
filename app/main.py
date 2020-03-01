@@ -20,7 +20,7 @@ death = pd.read_csv('../COVID-19/csse_covid_19_data/csse_covid_19_time_series/ti
 
 
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css','https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css']
 
 server = Flask(__name__)
 app = dash.Dash(__name__, server=server, external_stylesheets=external_stylesheets)
@@ -34,11 +34,13 @@ app.layout = html.Div([
         content='width=device-width, initial-scale=1.0'),
     html.Link(
         rel='shortcut icon',
-        href='./assets/favicon.ico'),
+        href='https://raw.githubusercontent.com/virdash/coronavirus/master/app/assets/favicon.ico'),
     # Navigation section
     html.Div([
         html.H3('Virdash'),
     ], className='banner'),
+
+    html.Div([])
 ])
 
 if __name__ == '__main__':
