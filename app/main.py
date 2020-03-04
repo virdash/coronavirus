@@ -8,6 +8,7 @@ import datetime
 import pandas as pd
 import numpy as np
 from flask import Flask
+import requests
 from geopy.geocoders import Nominatim
 import time
 
@@ -23,8 +24,8 @@ def getLatest(df):
     """
     This get the data of the last day from the dataframe and append it to the details
     """
-    df_info = df.ix[:,0:4]
-    df_last = df.ix[:,-1]
+    df_info = df.iloc[:,0:4]
+    df_last = df.iloc[:,-1]
     df_info['latest'] = df_last
     
     return df_info
@@ -33,14 +34,31 @@ def total_card(df):
     '''
     Total Confirmed
     '''
-    latest = getLatest(df)
-    return "{:,.0f}".format(latest['latest'].sum())
+    # latest = getLatest(df)
+    return "{:,.0f}".format(df['latest'].sum())
+
+def display_ip():
+    """
+    Function To Print GeoIP Latitude & Longitude
+    """
+    ip_request = requests.get('https://get.geojs.io/v1/ip.json')
+    my_ip = ip_request.json()['ip']
+    geo_request = requests.get('https://get.geojs.io/v1/ip/geo/' +my_ip + '.json')
+    geo_data = geo_request.json()
+    print({'latitude': geo_data['latitude'], 'longitude': geo_data['longitude']})
+
+
 
 # ***********************************************************************************
+# Get latest data
+get_confirm = getLatest(confirm)
+get_recover = getLatest(recover)
+get_death = getLatest(death)
+
 # Sending data to view
-total_confirmed = total_card(confirm)
-total_recovered = total_card(recover)
-total_death = total_card(death)
+total_confirmed = total_card(get_confirm)
+total_recovered = total_card(get_recover)
+total_death = total_card(get_death)
 
 contributor = """
 Solomon Igori🇳🇬,
@@ -48,10 +66,63 @@ Bright Morkli🇬🇭,
 Ehigiator Klinton🇳🇬,
 Gabriel Addo🇬🇭,
 Boris Bizo🇬🇦,
-Robin Mawsime🇬🇭,
+Mawusime Aglago🇬🇭,
 Daouda Tandiang DJIBA🇸🇳,
 Abdul Jalal Mohammed🇬🇭
 """
+
+
+figMap = go.Figure(
+    data = [
+            go.Scattergeo(
+            lon = get_confirm['Long'],
+            lat = get_confirm['Lat'],
+            text = get_confirm['Country/Region'],
+            mode = 'markers',
+            showlegend=False,
+            marker = dict(
+                size = 5,
+                color = 'rgba(255,0,0,0.5)',
+                sizemode = 'area'
+            ),
+        ),
+            go.Scattergeo(
+            lon = get_confirm['Long'],
+            lat = get_confirm['Lat'],
+            text = get_confirm['Country/Region'],
+            mode = 'markers',
+            showlegend=False,
+            marker = dict(
+                size = get_confirm['latest']/1000,
+                color = 'rgba(255,0,0,0.5)',
+            ),
+        ),
+    ]
+)
+figMap.update_layout(
+    autosize=True,
+    margin={
+        "r":0,
+        "t":0,
+        "l":0,
+        "b":0,
+    },
+    height=280,
+    # width=700,
+    geo = go.layout.Geo(
+        resolution = 50,
+        showframe = False,
+        showcoastlines = True,
+        showcountries = True,
+        landcolor = "rgb(229, 229, 229)",
+        countrycolor = "white" ,
+        projection = dict(scale=1),
+        coastlinecolor = "white",
+    ),
+    # legend_traceorder = 'reversed'
+)
+
+
 
 external_stylesheets = ['https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css']
 
@@ -70,7 +141,7 @@ app.layout = html.Div([
         rel='shortcut icon',
         href='https://raw.githubusercontent.com/virdash/coronavirus/master/app/assets/favicon.ico'),
     html.Script(
-        id='i tire o',
+        id='twitter',
         src='https://platform.twitter.com/widgets.js'),
 
     # Header section
@@ -112,12 +183,18 @@ app.layout = html.Div([
         html.Div([
             # Map
             html.Div([
-                'Map'
+                # Map
+                dcc.Graph(
+                    id='map',
+                    figure = figMap,
+                    className='world'
+                ),
             ], className='map card'),
 
             # Report a case
             html.Div([
                 html.P(['Report a Case'], className='title'),
+                html.Button('Suspected Case', id='button'),
             ], className='report card container'),
 
             # Contributors
@@ -145,9 +222,18 @@ app.layout = html.Div([
             ], className='report card container'),
         ], className='col-4'),
     ], className='row allColumns')
+
 ])
 
-
+# @app.callback(
+#     dash.dependencies.Output('output-container-button', 'children'),
+#     [dash.dependencies.Input('button', 'n_clicks')],
+# )
+# def update_output(n_clicks):
+#     return 'The input value was "{}" and the button has been clicked {} times'.format(
+#         value,
+#         n_clicks
+#     )
 
 if __name__ == '__main__':
     app.run_server(debug=True)

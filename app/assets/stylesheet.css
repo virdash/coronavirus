@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu:500,&display=swap');
 
+
+.modebar{
+    display: none !important;
+}
 .banner{
     font-family: 'Ubuntu';
     padding-left: 50px;
@@ -34,7 +38,10 @@
     min-height: 12rem;
 }
 .map{
-    min-height: 22.3rem;
+    min-height: 18rem;
+}
+.world{
+    margin-top: 0;
 }
 .report{
     min-height: 4.6rem;
