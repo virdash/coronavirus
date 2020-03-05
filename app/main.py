@@ -126,7 +126,6 @@ figMap.update_layout(
 
 external_stylesheets = ['https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css']
 
-external_scripts = ['https://platform.twitter.com/widgets.js']
 server = Flask(__name__)
 app = dash.Dash(__name__, server=server, external_stylesheets=external_stylesheets)
 
@@ -214,12 +213,12 @@ app.layout = html.Div([
             # Tweet
             html.Div([
                 html.P(['Tweets'], className='title'),
-                html.Iframe(
-                    src='https://www.sociablekit.com/app/embed/35336',
-                    # frameborder='0',
-                    width='100%',
-                    # height='1000'
-                )
+                # html.Iframe(
+                #     src='https://www.sociablekit.com/app/embed/35336',
+                #     # frameborder='0',
+                #     width='100%',
+                #     # height='1000'
+                # )
             ], className='news card container'),
 
             # Sponsor
