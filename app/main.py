@@ -214,6 +214,12 @@ app.layout = html.Div([
             # Tweet
             html.Div([
                 html.P(['Tweets'], className='title'),
+                html.Iframe(
+                    src='https://www.sociablekit.com/app/embed/35336',
+                    # frameborder='0',
+                    width='100%',
+                    # height='1000'
+                )
             ], className='news card container'),
 
             # Sponsor
