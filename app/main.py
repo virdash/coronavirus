@@ -13,9 +13,9 @@ from geopy.geocoders import Nominatim
 import time
 
 # Get data
-confirm = pd.read_csv('../COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv')
-recover = pd.read_csv('../COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv')
-death = pd.read_csv('../COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv')
+confirm = pd.read_csv('./data/confirm.csv')
+recover = pd.read_csv('./data/recover.csv')
+death = pd.read_csv('./data/death.csv')
 
 # ***********************************************************************************
 # Define functions
@@ -24,7 +24,7 @@ def getLatest(df):
     """
     This get the data of the last day from the dataframe and append it to the details
     """
-    df_info = df.iloc[:,0:4]
+    df_info = df.iloc[:,0:5]
     df_last = df.iloc[:,-1]
     df_info['latest'] = df_last
     
@@ -213,12 +213,6 @@ app.layout = html.Div([
             # Tweet
             html.Div([
                 html.P(['Tweets'], className='title'),
-                # html.Iframe(
-                #     src='https://www.sociablekit.com/app/embed/35336',
-                #     # frameborder='0',
-                #     width='100%',
-                #     # height='1000'
-                # )
             ], className='news card container'),
 
             # Sponsor
