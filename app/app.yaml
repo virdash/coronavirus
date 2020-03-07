@@ -1,4 +1,4 @@
-runtime: python
+runtime: python3.7
 # env: flex
 # entrypoint: python main.py
 entrypoint: gunicorn -b :$PORT main:server
