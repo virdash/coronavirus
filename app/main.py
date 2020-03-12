@@ -68,7 +68,8 @@ Gabriel Addo🇬🇭,
 Boris Bizo🇬🇦,
 Mawusime Aglago🇬🇭,
 Daouda Tandiang DJIBA🇸🇳,
-Abdul Jalal Mohammed🇬🇭
+Abdul Jalal Mohammed🇬🇭,
+John Bagiliko🇬🇭
 """
 
 
