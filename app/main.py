@@ -61,14 +61,15 @@ total_recovered = total_card(get_recover)
 total_death = total_card(get_death)
 
 contributor = """
-Solomon Igori🇳🇬,
-Bright Morkli🇬🇭,
-Ehigiator Klinton🇳🇬,
-Gabriel Addo🇬🇭,
-Boris Bizo🇬🇦,
-Mawusime Aglago🇬🇭,
-Daouda Tandiang DJIBA🇸🇳,
-Abdul Jalal Mohammed🇬🇭
+Solomon Igori🇳🇬, 
+Bright Morkli🇬🇭, 
+Ehigiator Klinton🇳🇬, 
+Gabriel Addo🇬🇭, 
+Boris Bizo🇬🇦, 
+Mawusime Aglago🇬🇭, 
+Daouda Tandiang DJIBA🇸🇳, 
+Abdul Jalal Mohammed🇬🇭, 
+John Bagiliko🇬🇭
 """
 
 
@@ -176,7 +177,7 @@ app.layout = html.Div([
             html.Div([
                 'Graph'
             ], className='graph card'),
-        ], className='col-2'),
+        ], className='col-12 col-md-2'),
 
         # Column 2
         html.Div([
@@ -196,32 +197,31 @@ app.layout = html.Div([
                 html.Button('Suspected Case', id='button'),
             ], className='report card container'),
 
-            # Contributors
+            # Sponsor
             html.Div([
-                html.P(['Contributors'], className='title'),
-                html.P(contributor, className='contributor')
+                html.P(['Sponsor'], className='title'),
             ], className='report card container'),
-        ], className='col-5'),
+        ], className='col-12 col-md-5'),
 
         # Column 3
         html.Div([
             # News
-            html.Div([
-                html.P(['News'], className='title'),
-            ], className='news card container'),
+            # html.Div([
+            #     html.P(['News'], className='title'),
+            # ], className='news card container'),
 
             # Tweet
             html.Div([
                 html.P(['Tweets'], className='title'),
             ], className='news card container'),
 
-            # Sponsor
+            # Contributors
             html.Div([
-                html.P(['Sponsor'], className='title'),
+                html.P(['Contributors'], className='title'),
+                html.P(contributor, className='contributor')
             ], className='report card container'),
-        ], className='col-4'),
+        ], className='col-12 col-md-4'),
     ], className='row allColumns')
-
 ])
 
 # @app.callback(

@@ -130,3 +130,5 @@ dmypy.json
 
 /workspace
 /COVID-19
+/env
+/analysis
