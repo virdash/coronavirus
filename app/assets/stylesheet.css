@@ -11,7 +11,7 @@ html{
 }
 .banner{
     font-family: 'Ubuntu';
-    padding-left: 50px;
+    /* padding-left: 50px; */
     background-color: #00acee;
     color: #ffffff;
     display: flex;
