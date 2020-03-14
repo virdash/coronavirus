@@ -13,9 +13,13 @@ from geopy.geocoders import Nominatim
 import time
 
 # Get data
-confirm = pd.read_csv('./data/confirm.csv')
-recover = pd.read_csv('./data/recover.csv')
-death = pd.read_csv('./data/death.csv')
+# confirm = pd.read_csv('./data/confirm.csv')
+# recover = pd.read_csv('./data/recover.csv')
+# death = pd.read_csv('./data/death.csv')
+
+confirm = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv')
+recover = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv')
+death = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv')
 
 # ***********************************************************************************
 # Define functions
@@ -197,11 +201,11 @@ app.layout = html.Div([
                 html.Button('Suspected Case', id='button'),
             ], className='report card container'),
 
-            # Sponsor
+            # Sponsors
             html.Div([
-                html.P(['Sponsor'], className='title'),
+                html.P(['Sponsors'], className='title'),
             ], className='report card container'),
-        ], className='col-12 col-md-5'),
+        ], className='col-12 col-md-6'),
 
         # Column 3
         html.Div([
@@ -221,7 +225,7 @@ app.layout = html.Div([
                 html.P(contributor, className='contributor')
             ], className='report card container'),
         ], className='col-12 col-md-4'),
-    ], className='row allColumns')
+    ], className='row allColumns, main')
 ])
 
 # @app.callback(

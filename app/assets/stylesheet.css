@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu:500,&display=swap');
 
-
+html{
+    width: 100vw;
+}
+.main{
+    margin: auto;
+}
 .modebar{
     display: none !important;
 }
@@ -11,6 +16,7 @@
     color: #ffffff;
     display: flex;
     align-items: center;
+    width: 100vw;
 }
 .total{
     min-height: 6rem;
