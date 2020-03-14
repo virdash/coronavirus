@@ -108,7 +108,7 @@ figMap.update_layout(
         "l":0,
         "b":0,
     },
-    height=280,
+    height=330,
     # width=700,
     geo = go.layout.Geo(
         resolution = 50,
@@ -117,7 +117,7 @@ figMap.update_layout(
         showcountries = True,
         landcolor = "rgb(229, 229, 229)",
         countrycolor = "white" ,
-        projection = dict(scale=1),
+        projection = dict(scale=1.2),
         coastlinecolor = "white",
     ),
     # legend_traceorder = 'reversed'
