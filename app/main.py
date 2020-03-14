@@ -11,6 +11,8 @@ from flask import Flask
 import requests
 from geopy.geocoders import Nominatim
 import time
+#import plotly.express as px
+from plotly.subplots import make_subplots
 
 # Get data
 # confirm = pd.read_csv('./data/confirm.csv')
@@ -21,6 +23,9 @@ confirm = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19
 recover = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv')
 death = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv')
 
+
+confirmed = pd.read_csv('../COVID-19/csse_covid_19_data/csse_covid_19_time_series/confirmed.csv')
+recovered = pd.read_csv('../COVID-19/csse_covid_19_data/csse_covid_19_time_series/recovered.csv')
 # ***********************************************************************************
 # Define functions
 
@@ -28,7 +33,7 @@ def getLatest(df):
     """
     This get the data of the last day from the dataframe and append it to the details
     """
-    df_info = df.iloc[:,0:5]
+    df_info = df.iloc[:,0:4]
     df_last = df.iloc[:,-1]
     df_info['latest'] = df_last
     
@@ -72,8 +77,7 @@ Gabriel Addo🇬🇭,
 Boris Bizo🇬🇦,
 Mawusime Aglago🇬🇭,
 Daouda Tandiang DJIBA🇸🇳,
-Abdul Jalal Mohammed🇬🇭,
-John Bagiliko🇬🇭
+Abdul Jalal Mohammed🇬🇭
 """
 
 
@@ -127,10 +131,31 @@ figMap.update_layout(
     # legend_traceorder = 'reversed'
 )
 
+#boy = np.arange(151)
+
+#fig = px.line(confirmed, x='Date', y = 'Mainland China Total')
+#fig = go.Figure(
+    #go.Scatter(x=confirmed['Date'], y=confirmed['Mainland China Total']))
+fig = make_subplots()
+fig.add_trace(
+    go.Scatter(x=confirmed['Date'], y=confirmed['Mainland China Total'],  mode = 'lines+markers', name = " Mainland China"), secondary_y=False )
+fig.add_trace(
+    go.Scatter(x=confirmed['Date'], y=confirmed['Other Locations'],  mode = 'lines+markers', name = " Other Locations"), secondary_y=False)
+fig.add_trace(
+    go.Scatter(x=recovered['Date'], y=recovered['Total recovered'],  mode = 'lines+markers', name = " Total Recovered"), secondary_y=False)
+fig.update_layout(height=380, width=320,  plot_bgcolor='whitesmoke', legend=dict(x=-.5, y=1.5), autosize=False, margin=dict(
+        l=0,
+        r=60,
+        b=90,
+        t=80,
+        pad=9,
+    ),  paper_bgcolor="white")
+
 
 
 external_stylesheets = ['https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css']
 
+external_scripts = ['https://platform.twitter.com/widgets.js']
 server = Flask(__name__)
 app = dash.Dash(__name__, server=server, external_stylesheets=external_stylesheets)
 
@@ -179,9 +204,14 @@ app.layout = html.Div([
 
             # Graph card
             html.Div([
-                'Graph'
-            ], className='graph card'),
-        ], className='col-12 col-md-2'),
+                dcc.Graph(
+                	animate=True,
+                    id='graph',
+                    figure = fig,
+                    className = 'graph'
+                    )
+            ],style={'width': '100%', 'display': 'inline-block', 'vertical-align': 'left'}, className='graph card'),
+        ]),
 
         # Column 2
         html.Div([
@@ -193,7 +223,7 @@ app.layout = html.Div([
                     figure = figMap,
                     className='world'
                 ),
-            ], className='map card'),
+            ],className='map card'),
 
             # Report a case
             html.Div([
@@ -210,9 +240,9 @@ app.layout = html.Div([
         # Column 3
         html.Div([
             # News
-            # html.Div([
-            #     html.P(['News'], className='title'),
-            # ], className='news card container'),
+            html.Div([
+                html.P(['News'], className='title'),
+            ], className='news card container'),
 
             # Tweet
             html.Div([
