@@ -217,7 +217,15 @@ figMap.update_layout(
     ),
     # legend_traceorder = 'reversed'
 )
-
+# *************************************************************************
+# Twitter 
+dummy_tweet = [
+    {
+        'Username':'Solomon Igori',
+        'Handle':'SolomonIgori',
+        'Text':'Coronavirus: Is the outbreak in Italy really *so different* from the outbreak in Germany (as suggested by many)?'
+    }
+]
 
 
 external_stylesheets = ['https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css']
@@ -285,7 +293,7 @@ index = html.Div([
 
         # Report a case
         dcc.Link(
-            'Report a Case',
+            'Report a suspected Case',
             href='/report',
             className='report card container'),
 
@@ -310,13 +318,13 @@ index = html.Div([
         # Graph card
         html.Div([
             # Graph
-            html.P(['Graph'], className='title container'),
+            html.P(['Graph'], className='title'),
             dcc.Graph(
                 id='lineGraph',
                 figure = line,
                 className=''
             ),
-        ], className='graph card'),   
+        ], className='graph card container'),   
     ], className='col-12 col-md-6'),
 
     # Column 3
@@ -329,7 +337,7 @@ index = html.Div([
         # Tweet
         html.Div([
             html.P(['Tweets'], className='title'),
-        ], className='news card container'),
+        ], className='tweets card container'),
 
         # Contributors
         html.Div([
