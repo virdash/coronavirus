@@ -9,6 +9,16 @@ html{
 .modebar{
     display: none !important;
 }
+#logo {
+    font-size: 2rem;
+    font-weight: 500;
+}
+a#logo{
+    text-decoration: none;
+}
+a.link{
+    color: #ffffff!important;
+}
 .banner{
     font-family: 'Ubuntu';
     /* padding-left: 50px; */
@@ -16,6 +26,7 @@ html{
     color: #ffffff;
     display: flex;
     align-items: center;
+    height: 70px;
     width: 100vw;
 }
 .total{
@@ -32,7 +43,7 @@ html{
     text-align: right;
 }
 .confirm{
-    color: orange;
+    color: rgb(255, 103, 0);
 }
 .recover{
     color: green;
@@ -50,10 +61,23 @@ html{
     margin-top: 0;
 }
 .report{
+    text-align: center;
+    padding-top: 1.6rem;
+    color: rgb(255, 103, 0);
     min-height: 4.6rem;
+}
+a.report{
+    text-decoration: none;
+}
+.report:hover{
+    background-color: rgb(255, 103, 0);
+    color: #ffffff;
 }
 .news{
     min-height: 13.4rem;
+}
+.sponsor{
+    min-height: 5.5rem;
 }
 .card{
     border: none;
@@ -73,4 +97,14 @@ html{
 .allColumns{
     display: flex;
     justify-content: space-evenly;
+}
+/* html, body { overflow: hidden; } */
+/* .reportPage, reportForm { overflow: hidden; } */
+iframe {
+    height: 100vh;
+    width: 100%;
+    /* position: absolute; */
+    border: none;
+    margin: auto;
+    overflow: hidden!important;
 }

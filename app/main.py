@@ -97,8 +97,8 @@ line.add_trace(
         x = confirm_line_data.index,
         y = confirm_line_data.values,
         text=confirm_line_data.values,
-        hoverinfo='text',
-        mode = 'lines',
+        hovertemplate = "<b>Confirmed: </b>%{text}<extra>%{x}</extra><br>",
+        mode = 'lines+markers',
         line = dict(
             color = 'rgb(255, 103, 0)',
             width=2,)
@@ -108,9 +108,9 @@ line.add_trace(
     go.Scatter(
         x = recover_line_data.index,
         y = recover_line_data.values,
-        mode = 'lines',
+        mode = 'lines+markers',
         text=recover_line_data.values,
-        hoverinfo='text',
+        hovertemplate = "<b>Recovered: </b>%{text}<extra>%{x}</extra><br>",
         line = dict(
             color = 'rgb(0, 128, 0)',
             width=2,)
@@ -120,9 +120,9 @@ line.add_trace(
     go.Scatter(
         x = death_line_data.index,
         y = death_line_data.values,
-        mode = 'lines',
+        mode = 'lines+markers',
         text=death_line_data.values,
-        hoverinfo='text',
+        hovertemplate = "<b>Death: </b>%{text}<extra>%{x}</extra><br>",
         line = dict(
             color = 'rgb(255, 0, 0)',
             width=2,)
@@ -140,7 +140,7 @@ line.update_layout(
         showgrid=False,
         zeroline=False,
         showline=False,
-        showticklabels=False,
+        showticklabels=True,
     ),
     height=150,
     autosize=True,
@@ -239,101 +239,121 @@ app.layout = html.Div([
         id='twitter',
         src='https://platform.twitter.com/widgets.js'),
 
+    dcc.Location(id='url', refresh=False),
+    # html.Div(id='page-content')
+
     # Header section
     html.Div([
         html.Div([
-            html.H2('Virdash'),
-        ], className='container')
+            dcc.Link(
+                'Virdash',
+                href='/',
+                id='logo',
+                className='p-2 link'),
+
+            dcc.Link(
+                'Report a Case',
+                href='/report',
+                className='ml-auto p-4 link'),
+        ], className='d-flex container')
     ], className='banner'),
-
-    html.Div([
-        # column 1
-        html.Div([
-            # Confirmed card
-            html.Div([
-                html.P(['Total Confirmed'], className='title'),
-                html.H3(total_confirmed, className='confirm value')
-            ], className='total card container'),
-
-            # Recovery card
-            html.Div([
-                html.P(['Total Recovered'], className='title'),
-                html.H3(total_recovered, className='recover value')
-            ], className='total card container'),
-
-            # Death card
-            html.Div([
-                html.P(['Total Death'], className='title'),
-                html.H3(total_death, className='death value')
-            ], className='total card container'),
-
-            # Graph card
-            html.Div([
-                # Graph
-                html.P(['Graph'], className='title container'),
-                dcc.Graph(
-                    id='lineGraph',
-                    figure = line,
-                    className=''
-                ),
-            ], className='graph card'),   
-            
-        ], className='col-12 col-md-2'),
-
-        # Column 2
-        html.Div([
-            # Map
-            html.Div([
-                # Map
-                dcc.Graph(
-                    id='map',
-                    figure = figMap,
-                    className='world'
-                ),
-            ], className='map card'),
-            
-            # Report a case
-            html.Div([
-                html.P(['Report a Case'], className='title'),
-                html.Button('Suspected Case', id='button'),
-            ], className='report card container'),
-
-            # Sponsor
-            html.Div([
-                html.P(['Sponsor'], className='title'),
-            ], className='report card container'),
-        ], className='col-12 col-md-6'),
-
-        # Column 3
-        html.Div([
-            # News
-            # html.Div([
-            #     html.P(['News'], className='title'),
-            # ], className='news card container'),
-
-            # Tweet
-            html.Div([
-                html.P(['Tweets'], className='title'),
-            ], className='news card container'),
-
-            # Contributors
-            html.Div([
-                html.P(['Contributors'], className='title'),
-                html.P(contributor, className='contributor')
-            ], className='report card container'),
-        ], className='col-12 col-md-4'),
-    ], className='row allColumns main')
+    html.Div(id='page-content')
 ])
 
-# @app.callback(
-#     dash.dependencies.Output('output-container-button', 'children'),
-#     [dash.dependencies.Input('button', 'n_clicks')],
-# )
-# def update_output(n_clicks):
-#     return 'The input value was "{}" and the button has been clicked {} times'.format(
-#         value,
-#         n_clicks
-#     )
+# Header section
+index = html.Div([
+    # column 1
+    html.Div([
+        # Confirmed card
+        html.Div([
+            html.P(['Total Confirmed'], className='title'),
+            html.H3(total_confirmed, className='confirm value')
+        ], className='total card container'),
+
+        # Recovery card
+        html.Div([
+            html.P(['Total Recovered'], className='title'),
+            html.H3(total_recovered, className='recover value')
+        ], className='total card container'),
+
+        # Death card
+        html.Div([
+            html.P(['Total Death'], className='title'),
+            html.H3(total_death, className='death value')
+        ], className='total card container'),
+
+
+        # Report a case
+        dcc.Link(
+            'Report a Case',
+            href='/report',
+            className='report card container'),
+
+        # Sponsor
+        html.Div([
+            html.P(['Sponsor'], className='title'),
+        ], className='sponsor card container'), 
+    ], className='col-12 col-md-2'),
+
+    # Column 2
+    html.Div([
+        # Map
+        html.Div([
+            # Map
+            dcc.Graph(
+                id='map',
+                figure = figMap,
+                className='world'
+            ),
+        ], className='map card'),
+        
+        # Graph card
+        html.Div([
+            # Graph
+            html.P(['Graph'], className='title container'),
+            dcc.Graph(
+                id='lineGraph',
+                figure = line,
+                className=''
+            ),
+        ], className='graph card'),   
+    ], className='col-12 col-md-6'),
+
+    # Column 3
+    html.Div([
+        # News
+        # html.Div([
+        #     html.P(['News'], className='title'),
+        # ], className='news card container'),
+
+        # Tweet
+        html.Div([
+            html.P(['Tweets'], className='title'),
+        ], className='news card container'),
+
+        # Contributors
+        html.Div([
+            html.P(['Contributors'], className='title'),
+            html.P(contributor, className='contributor')
+        ], className='contribute card container'),
+    ], className='col-12 col-md-4'),
+], className='row allColumns main')
+
+report = html.Div([
+    # html.H1(['redering form']),
+    html.Iframe(
+        src="https://docs.google.com/forms/d/e/1FAIpQLSdqbSSir6_jVlj0ew9Ad8Os3GTbxqD1PrFNsJkJgbmGVfLGqQ/viewform?embedded=true",
+        className='reportForm',)
+], className='reportPage')
+
+# Update the index
+@app.callback(dash.dependencies.Output('page-content', 'children'),
+              [dash.dependencies.Input('url', 'pathname')])
+def display_page(pathname):
+    if pathname == '/report':
+        return report
+    else:
+        return index
 
 if __name__ == '__main__':
     app.run_server(debug=True)
