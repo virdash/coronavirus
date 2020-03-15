@@ -217,7 +217,50 @@ figMap.update_layout(
     ),
     # legend_traceorder = 'reversed'
 )
+# *************************************************************************
+# Twitter 
+dummy_tweets = [
+    {
+        'username':'Solomon Igori',
+        'handle':'SolomonIgori',
+        'text':'Coronavirus: Is the outbreak in Italy really *so different* from the outbreak in Germany (as suggested by many)?'
+    },
+    {
+        'username':'Solomon Igori',
+        'handle':'SolomonIgori',
+        'text':'Coronavirus: Is the outbreak in Italy really *so different* from the outbreak in Germany (as suggested by many)?'
+    },
+    {
+        'username':'Solomon Igori',
+        'handle':'SolomonIgori',
+        'text':'Coronavirus: Is the outbreak in Italy really *so different* from the outbreak in Germany (as suggested by many)?'
+    },
+    {
+        'username':'Solomon Igori',
+        'handle':'SolomonIgori',
+        'text':'Coronavirus: Is the outbreak in Italy really *so different* from the outbreak in Germany (as suggested by many)?'
+    },
+    {
+        'username':'Solomon Igori',
+        'handle':'SolomonIgori',
+        'text':'Coronavirus: Is the outbreak in Italy really *so different* from the outbreak in Germany (as suggested by many)?'
+    }
+]
 
+tweetsList = []
+
+def tweetFunc(tweet):
+    return html.Div([
+        html.Div([
+            html.Span(tweet['username'], className='username'),
+            html.Span('  @', className='handle'),
+            html.Span(tweet['handle'], className='handle')
+        ]),
+        html.Div(tweet['text'], className='text')
+    ], className='card container')
+
+for tweet in dummy_tweets:
+    tweetsList.append(tweetFunc(tweet))
 
 
 external_stylesheets = ['https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css']
@@ -285,7 +328,7 @@ index = html.Div([
 
         # Report a case
         dcc.Link(
-            'Report a Case',
+            'Report a suspected Case',
             href='/report',
             className='report card container'),
 
@@ -310,13 +353,13 @@ index = html.Div([
         # Graph card
         html.Div([
             # Graph
-            html.P(['Graph'], className='title container'),
+            html.P(['Graph'], className='title'),
             dcc.Graph(
                 id='lineGraph',
                 figure = line,
                 className=''
             ),
-        ], className='graph card'),   
+        ], className='graph card container'),   
     ], className='col-12 col-md-6'),
 
     # Column 3
@@ -329,7 +372,8 @@ index = html.Div([
         # Tweet
         html.Div([
             html.P(['Tweets'], className='title'),
-        ], className='news card container'),
+            html.Div(tweetsList, className='tweetList')
+        ], className='tweets card container'),
 
         # Contributors
         html.Div([
