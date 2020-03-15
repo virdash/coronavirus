@@ -13,9 +13,13 @@ from geopy.geocoders import Nominatim
 import time
 
 # Get data
-confirm = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv')
-recover = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv')
-death = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv')
+confirm = pd.read_csv('data/confirm.csv')
+recover = pd.read_csv('data/recover.csv')
+death = pd.read_csv('data/death.csv')
+
+# confirm = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv')
+# recover = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv')
+# death = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv')
 
 # ***********************************************************************************
 # Define functions
@@ -47,6 +51,15 @@ def display_ip():
     geo_data = geo_request.json()
     print({'latitude': geo_data['latitude'], 'longitude': geo_data['longitude']})
 
+def mergeData(x,recover,death):
+    """
+    Function that merge the confirm, recover and death to one dataframe
+    """
+    x = x.rename(columns = {'latest':'confirm'})
+    x['recover'] = recover['latest']
+    x['death'] = death['latest']
+
+    return x
 
 
 # ***********************************************************************************
@@ -72,34 +85,112 @@ Abdul Jalal Mohammed🇬🇭,
 John Bagiliko🇬🇭
 """
 
+line = go.Figure()
+#***************************************************************************
+# Graph
+confirm_line_data = confirm.iloc[:,5:].sum()
+recover_line_data = recover.iloc[:,5:].sum()
+death_line_data = death.iloc[:,5:].sum()
 
-figMap = go.Figure(
-    data = [
+line.add_trace(
+    go.Scatter(
+        x = confirm_line_data.index,
+        y = confirm_line_data.values,
+        text=confirm_line_data.values,
+        hoverinfo='text',
+        mode = 'lines',
+        line = dict(
+            color = 'rgb(255, 103, 0)',
+            width=2,)
+    ),
+)
+line.add_trace(
+    go.Scatter(
+        x = recover_line_data.index,
+        y = recover_line_data.values,
+        mode = 'lines',
+        text=recover_line_data.values,
+        hoverinfo='text',
+        line = dict(
+            color = 'rgb(0, 128, 0)',
+            width=2,)
+    )
+)
+line.add_trace(
+    go.Scatter(
+        x = death_line_data.index,
+        y = death_line_data.values,
+        mode = 'lines',
+        text=death_line_data.values,
+        hoverinfo='text',
+        line = dict(
+            color = 'rgb(255, 0, 0)',
+            width=2,)
+    )
+)
+
+line.update_layout(
+    xaxis=dict(
+        showline=False,
+        showgrid=False,
+        zeroline=False,
+        showticklabels=False,
+    ),
+    yaxis=dict(
+        showgrid=False,
+        zeroline=False,
+        showline=False,
+        showticklabels=False,
+    ),
+    height=150,
+    autosize=True,
+    margin=dict(
+        # autoexpand=False,
+        l=0,
+        r=0,
+        t=0,
+        b=0
+    ),
+    showlegend=False,
+    plot_bgcolor='white'
+)
+
+
+#****************************************************************************
+# Merged data
+get_merged = mergeData(get_confirm, get_recover, get_death)
+
+limits = [(1,10), (10,100), (100,1000), (1000,10000), (10000,1000000000)]
+size = [5, 10, 15, 20, 30]
+
+fig = go.Figure()
+
+for i in range(len(limits)):
+    lim = limits[i]
+    get_confirm_range = get_merged[get_merged['confirm']>=lim[0]]
+    get_confirm_range = get_confirm_range[get_confirm_range['confirm']<lim[1]]
+
+    customdata=np.dstack((get_confirm_range['confirm'], get_confirm_range['recover']))
+
+    figMap = fig.add_trace(
             go.Scattergeo(
-            lon = get_confirm['Long'],
-            lat = get_confirm['Lat'],
-            text = get_confirm['Country/Region'],
+            lon = get_confirm_range['Long'],
+            lat = get_confirm_range['Lat'],
+            text = get_confirm_range['Country/Region'],
             mode = 'markers',
             showlegend=False,
             marker = dict(
-                size = 5,
-                color = 'rgba(255,0,0,0.5)',
+                size = size[i],
+                color = 'rgba(255, 103, 0,0.5)',
                 sizemode = 'area'
             ),
+            customdata=get_confirm_range['confirm'],
+            # hovertext=[get_confirm_range['Country/Region'],get_confirm_range['confirm'],get_confirm_range['recover'],get_confirm_range['death']]
+            hovertemplate = "<b>%{text}</b>,<br>Confirm:%{customdata}<extra></extra><br>",
+            # # trace=off
+            # hoverinfo='text'
         ),
-            go.Scattergeo(
-            lon = get_confirm['Long'],
-            lat = get_confirm['Lat'],
-            text = get_confirm['Country/Region'],
-            mode = 'markers',
-            showlegend=False,
-            marker = dict(
-                size = get_confirm['latest']/1000,
-                color = 'rgba(255,0,0,0.5)',
-            ),
-        ),
-    ]
-)
+    )
 figMap.update_layout(
     autosize=True,
     margin={
@@ -117,8 +208,12 @@ figMap.update_layout(
         showcountries = True,
         landcolor = "rgb(229, 229, 229)",
         countrycolor = "white" ,
-        projection = dict(scale=1.2),
+        projection = dict(scale=1.8),
         coastlinecolor = "white",
+        center= dict(
+            lat= 8.7832,
+            lon= 20.5085,
+        )
     ),
     # legend_traceorder = 'reversed'
 )
@@ -172,11 +267,17 @@ app.layout = html.Div([
                 html.H3(total_death, className='death value')
             ], className='total card container'),
 
-
             # Graph card
             html.Div([
-                'Graph'
-            ], className='graph card'),
+                # Graph
+                html.P(['Graph'], className='title container'),
+                dcc.Graph(
+                    id='lineGraph',
+                    figure = line,
+                    className=''
+                ),
+            ], className='graph card'),   
+            
         ], className='col-12 col-md-2'),
 
         # Column 2
@@ -190,7 +291,7 @@ app.layout = html.Div([
                     className='world'
                 ),
             ], className='map card'),
-
+            
             # Report a case
             html.Div([
                 html.P(['Report a Case'], className='title'),
