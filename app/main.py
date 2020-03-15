@@ -219,13 +219,48 @@ figMap.update_layout(
 )
 # *************************************************************************
 # Twitter 
-dummy_tweet = [
+dummy_tweets = [
     {
-        'Username':'Solomon Igori',
-        'Handle':'SolomonIgori',
-        'Text':'Coronavirus: Is the outbreak in Italy really *so different* from the outbreak in Germany (as suggested by many)?'
+        'username':'Solomon Igori',
+        'handle':'SolomonIgori',
+        'text':'Coronavirus: Is the outbreak in Italy really *so different* from the outbreak in Germany (as suggested by many)?'
+    },
+    {
+        'username':'Solomon Igori',
+        'handle':'SolomonIgori',
+        'text':'Coronavirus: Is the outbreak in Italy really *so different* from the outbreak in Germany (as suggested by many)?'
+    },
+    {
+        'username':'Solomon Igori',
+        'handle':'SolomonIgori',
+        'text':'Coronavirus: Is the outbreak in Italy really *so different* from the outbreak in Germany (as suggested by many)?'
+    },
+    {
+        'username':'Solomon Igori',
+        'handle':'SolomonIgori',
+        'text':'Coronavirus: Is the outbreak in Italy really *so different* from the outbreak in Germany (as suggested by many)?'
+    },
+    {
+        'username':'Solomon Igori',
+        'handle':'SolomonIgori',
+        'text':'Coronavirus: Is the outbreak in Italy really *so different* from the outbreak in Germany (as suggested by many)?'
     }
 ]
+
+tweetsList = []
+
+def tweetFunc(tweet):
+    return html.Div([
+        html.Div([
+            html.Span(tweet['username'], className='username'),
+            html.Span('  @', className='handle'),
+            html.Span(tweet['handle'], className='handle')
+        ]),
+        html.Div(tweet['text'], className='text')
+    ], className='card container')
+
+for tweet in dummy_tweets:
+    tweetsList.append(tweetFunc(tweet))
 
 
 external_stylesheets = ['https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css']
@@ -337,6 +372,7 @@ index = html.Div([
         # Tweet
         html.Div([
             html.P(['Tweets'], className='title'),
+            html.Div(tweetsList, className='tweetList')
         ], className='tweets card container'),
 
         # Contributors
